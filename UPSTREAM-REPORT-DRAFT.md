@@ -1,66 +1,61 @@
 # DRAFT: report to linux-sound (not submitted)
 
 > **Status: draft only.** It's written for `linux-sound@vger.kernel.org` (Cc: Takashi Iwai), per
-> `MAINTAINERS` for `sound/usb/`. Before sending, re-check against the current kernel, trim it,
-> and ideally reproduce the fault from a known starting state (see "What would make this
-> actionable" below).
+> `MAINTAINERS` for `sound/usb/`. Before sending, re-test on the current mainline kernel, and
+> ideally on a second C920 unit or firmware revision.
 
 ---
 
-**Subject:** `[BUG] ALSA: usb-audio: Logitech C920 (046d:082d) mic stuck returning all-zero samples; cleared by a plain alt-1 stream`
+**Subject:** `[BUG] ALSA: usb-audio: Logitech C920 (046d:082d) capture stays silent after unmute if stream started while muted`
 
 Hi,
 
-A Logitech HD Pro Webcam C920 (`046d:082d`, bcdDevice 0.11) microphone got into a state where
-every isochronous IN packet carried all-zero samples under snd-usb-audio. The mic worked on
-Windows during the same period. The state survived physical replugs, a different USB port, and
-kernels 7.1.9-arch1, 7.2.3-arch1 and 7.2.5 (Omarchy build).
+The Logitech HD Pro Webcam C920 (`046d:082d`, bcdDevice 0.11) microphone has a firmware bug in
+its UAC1 Feature Unit mute. If the capture stream is started while the Feature Unit mute is
+set, clearing the mute afterwards has no effect. The device keeps returning all-zero isochronous
+packets, while `GET_CUR` reports mute = 0. Only re-enumeration (replugging) recovers it.
 
-**Observations while stuck**
+In practice this is easy to hit on a desktop. PipeWire maps the user's mic mute to the ALSA
+`Mic Capture Switch`, so "mute, then an app opens the mic, then unmute" leaves the mic dead.
 
-- `usbmon`: 5,999 completed iso IN packets on EP 0x82 at alt 3 (32 kHz), all zero. There were
-  no errors and video on EP 0x81 was normal.
-- Reading the Feature Unit (id 5) directly over usbfs with the driver unbound: mute = 0,
-  volume CUR 0x2400 (36 dB), MIN 0x1400, MAX 0x3200, RES 0x0200, EP rate 32000. All sane.
-- Quirk flags tried live (write `quirk_flags`, re-probe): `SET_IFACE_FIRST`,
-  `FORCE_IFACE_RESET`, `IFACE_DELAY`, `GET_SAMPLE_RATE`, `CTL_MSG_DELAY_5M`, and all
-  combined. The mic still returned all zeros.
+**Reproducer.** The tested version is `tools/c920-repro.sh` in the repo below: amixer plus
+`pw-record`, no root, stock snd-usb-audio and PipeWire. Equivalent plain-ALSA form (not run
+verbatim; PipeWire must not be holding the device):
 
-**Windows, fresh plug (USBPcap)**
+```
+amixer -c C920 sset Mic nocap          # FU 5 mute = 1
+arecord -D hw:C920 -f S16_LE -r 32000 -c 2 -d 2 /dev/null   # start a stream while muted
+amixer -c C920 sset Mic cap            # FU 5 mute = 0; GET_CUR confirms 0
+arecord -D hw:C920 -f S16_LE -r 32000 -c 2 -d 3 out.wav     # every sample is 0
+```
 
-Windows sends **no** audio class requests. It uses `SET_INTERFACE 3/0`, then `3/1` to record
-and `3/0` to stop. Result: 9,022 of 9,150 iso packets non-zero.
+| Sequence | Result |
+|---|---|
+| mute → unmute while idle | OK |
+| mute → unmute while a stream is running | OK (silent while muted, audio resumes) |
+| mute → **start stream** → unmute | stuck silent until replug |
 
-**Linux, fresh plug (usbmon, captured after the fault had cleared)**
+The same was confirmed at the USB level, over raw usbfs with snd-usb-audio unbound, `usbmon`
+recording: `SET_CUR` mute = 1 → stream → `SET_CUR` mute = 0 → all later iso IN packets on EP 0x82
+are all-zero at alt 1 (16 kHz) and alt 3 (32 kHz). The volume, sample rate and resolution
+requests the driver sends at probe (including its ten `SET_RES` writes and the sticky-mixer
+sweep) did **not** affect it.
 
-Linux cycles alt 1/2/3, each with endpoint `SET_CUR` for the sample rate. Then, on FU 5
-volume: `GET_MAX`, `GET_MIN`, `GET_RES`, then **`SET_RES 0x0001` ten times**, `GET_RES`, then
-`SET_CUR` 0x1400/0x2c00/0x2a00 (the sticky-mixer check), then 0x2400. The full decode is in
-`captures/linux-driver-setup-fresh-plug.txt` in the repo linked below.
+Windows didn't touch the Feature Unit mute at all in a USBPcap trace, which fits the webcam
+working there.
 
-**What cleared it**
+**Proposed fix:** don't expose the C920's Feature Unit mute. That's the same approach as
+5ab3dc647751 ("ALSA: usb-audio: skip the broken mute control on AVerMedia GC553Pro"), for
+example a `usbmix_ctl_map` entry for `046d:082d` that ignores unit 5's mute control. Userspace
+then falls back to software mute, which works. As a userspace workaround,
+`api.alsa.soft-mixer = true` for the device in WirePlumber stops the bug from triggering; this has
+been verified.
 
-With snd_usb_audio unloaded and blocked from auto-loading, and the webcam replugged, I used
-usbfs to claim interfaces 2 and 3 and stream alt 1 with no class requests first: the mic had
-sound. Adding GET/SET rate, unmute, GET volume and a volume max/min/mid sweep, each followed by
-a stream, still gave sound. After reloading snd-usb-audio, the mic worked through ALSA and
-PipeWire. It has since kept working across replugs **without** any workaround.
+Tested on kernels 7.1.9-arch1, 7.2.3-arch1 and 7.2.5 (Omarchy build), PipeWire 1.6.8,
+WirePlumber 0.5.17, Intel Tiger Lake xHCI.
 
-**Suspects (unconfirmed)**
-
-1. The ten `SET_RES` writes to the FU volume control at probe. Windows never sends them. If
-   the firmware ever persists a resolution it accepted, a bad value could plausibly leave the
-   gain stage producing zeros. (RES read back as 0x0200 while stuck, so this is speculative.)
-2. The device's first post-enumeration stream being alt 3 rather than alt 1.
-
-**What would make this actionable**
-
-A way to put the device back into the stuck state. I no longer can: it has stayed good since
-it was cleared. If anyone else hits the same symptom (all-zero samples, works on Windows),
-please capture `usbmon` from plug-in and try the repo's `tools/c920-bisect.py` *before*
-anything else touches the device.
-
-The workaround, captures and tools are at https://github.com/creaseygit/c920-mic-wake
+Reproducer, captures, tools and the full investigation are at
+https://github.com/creaseygit/c920-mic-wake
 
 Thanks,
 Paul Oesten

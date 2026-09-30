@@ -10,70 +10,60 @@ timeout 3 pw-record --target "$SRC" /tmp/c920.wav
 python3 -c "import wave,array; w=wave.open('/tmp/c920.wav'); a=array.array('h', w.readframes(w.getnframes())); print(sum(1 for x in a if x), 'non-zero samples of', len(a))"
 ```
 
-A working mic is never exactly zero, even in a silent room. If you get `0 non-zero samples`, this repo is for you.
+A working mic is never exactly zero, even in a silent room. If you get `0 non-zero samples`, this repo is for you. **Replugging the webcam brings it back**; the fix below stops it happening again.
 
-## What's going on
+## The cause
+
+It's a firmware bug in the C920 (`046d:082d`):
+
+> If the mic **starts streaming while the webcam's hardware mute is on**, then after unmuting it keeps sending pure silence, while reporting itself as unmuted. It stays that way until it's replugged.
 
 ```
- stuck C920 + Linux driver              ──► all-zero audio            ✗
- read it once "the Windows way" over USB ──► driver takes over again ──► real audio   ✓
+ mute on ──► app opens the mic ──► unmute ──► "unmuted", but all-zero audio   ✗  (until replug)
+ mute on/off while idle, or mid-call                                 ──► fine   ✓
 ```
 
-The webcam got stuck in a state where, under the Linux USB audio driver (`snd-usb-audio`), it
-sent pure silence. A USB capture showed every audio packet arriving intact, but full of zeros.
-The state survived replugs, a different USB port, three kernels, and a trip to Windows (where the
-mic worked anyway, because Windows sets the mic up far more simply).
+On Linux, PipeWire normally passes the desktop's mic mute (a keyboard mute key, a status-bar mic toggle, `pactl set-source-mute`, `pavucontrol`) to the webcam's hardware mute when the webcam has one. So "mute, then join a call or open a recorder, then unmute" is enough to trigger it. In our Windows USB capture, Windows never touched the webcam's mute at all, which fits the same webcam working there.
 
-Streaming the mic once the Windows way, straight over USB, then replaying Linux's setup
-requests, cleared it. From then on the normal driver, PipeWire and every app worked, including
-after replugs with no fix running.
+Reproduce it in about 10 seconds, without root: [`tools/c920-repro.sh`](tools/c920-repro.sh).
 
-`c920-mic-wake` replays that clearing sequence automatically on every plug-in and at boot, as a
-safeguard. A udev rule runs it. It briefly detaches the audio driver, runs the sequence over raw
-USB in about a second, then re-attaches the driver.
+## The fix
 
-The exact trigger isn't confirmed. The strongest lead is that Linux sends the mic's volume
-control ten "set resolution" commands at startup, which Windows never sends. See
-[`REPORT.md`](REPORT.md) and the draft kernel report
-[`UPSTREAM-REPORT-DRAFT.md`](UPSTREAM-REPORT-DRAFT.md).
-
-## Install
+A one-file WirePlumber rule ([`51-c920-soft-mixer.conf`](51-c920-soft-mixer.conf)) that makes PipeWire handle the C920's mute and volume in software (`api.alsa.soft-mixer = true`), so the webcam's buggy hardware mute is never used. It needs no root.
 
 ```bash
 git clone https://github.com/creaseygit/c920-mic-wake
 cd c920-mic-wake
-./install.sh
+./install.sh          # then replug the webcam once if the mic is currently silent
 ```
 
-Check it ran:
-
-```bash
-journalctl -o cat | grep c920-mic-wake | tail -1
-# c920-mic-wake: woke 1-1 (/dev/bus/usb/001/012): 486/504 then 286/304 packets non-zero during warm-up; snd-usb-audio re-bound
-```
+Verified: with the rule active, the exact trigger (mute → start mic → unmute) leaves the mic working, with 286,429 of 286,720 samples non-zero. The webcam's hardware switch stayed unmuted throughout.
 
 To remove it, run `./uninstall.sh`.
 
-**Requirements:** Python 3 (standard library only), systemd and udev. It was built and tested on Arch Linux ([Omarchy](https://omarchy.org)) with PipeWire and kernels 7.1.9, 7.2.3 and 7.2.5.
+**Requirements:** PipeWire with WirePlumber 0.5+. Built and tested on Arch Linux ([Omarchy](https://omarchy.org)), PipeWire 1.6.8, WirePlumber 0.5.17, kernels 7.1.9, 7.2.3 and 7.2.5.
+
+### Optional: the plug-in wake-up script
+
+[`c920-mic-wake`](c920-mic-wake) came first, before the cause was known. It's a udev-triggered script that briefly takes the mic from the kernel driver on every plug-in and runs a known-good "wake-up" sequence over raw USB. Replugging alone already clears the stuck state, so you don't need it with the WirePlumber rule. It's kept for reference and for setups without WirePlumber: `./install.sh --with-wake`.
 
 ## What's in here
 
 | File | Purpose |
 |---|---|
-| [`c920-mic-wake`](c920-mic-wake) | The fix: wakes the mic over raw usbfs, then hands it back to `snd-usb-audio` |
-| [`51-c920-mic-wake.rules`](51-c920-mic-wake.rules) | udev rule that runs it on every plug-in (`046d:082d`) |
-| [`REPORT.md`](REPORT.md) | The full investigation: every layer tested, the Windows-vs-Linux USB comparison, and the bisect that found the fix |
-| [`UPSTREAM-REPORT-DRAFT.md`](UPSTREAM-REPORT-DRAFT.md) | Draft bug report for the Linux kernel sound maintainers (not submitted) |
+| [`51-c920-soft-mixer.conf`](51-c920-soft-mixer.conf) | **The fix**: WirePlumber rule that uses software mute and volume for the C920 |
+| [`tools/c920-repro.sh`](tools/c920-repro.sh) | Reproduces the bug in about 10 s through the normal ALSA/PipeWire stack |
+| [`REPORT.md`](REPORT.md) | The full investigation, from "all zeros" to the proven trigger |
+| [`UPSTREAM-REPORT-DRAFT.md`](UPSTREAM-REPORT-DRAFT.md) | Draft bug report and proposed kernel quirk for the Linux sound maintainers (not submitted) |
 | [`captures/`](captures) | Decoded Linux and Windows USB traffic for a freshly plugged C920 |
-| [`tools/c920-bisect.py`](tools/c920-bisect.py) | Streams the mic the Windows way, then re-adds each request Linux sends, to find which one matters |
-| [`tools/parse-usbpcap.py`](tools/parse-usbpcap.py) | Decodes a Windows USBPcap capture into control requests and audio-packet stats |
-| [`tools/parse-usbmon.py`](tools/parse-usbmon.py) | Decodes a Linux `usbmon` capture into labelled webcam audio/video requests |
-
-**Hit this yourself?** Capture evidence *before* running the fix; see "If you hit this" in [`REPORT.md`](REPORT.md). A reproducible stuck state is what's needed to get this fixed in the kernel.
+| [`tools/c920-rebreak.py`](tools/c920-rebreak.py) | Sends suspect requests one at a time over raw USB; this is what found the trigger |
+| [`tools/c920-bisect.py`](tools/c920-bisect.py) | Streams the mic the Windows way, then re-adds Linux's setup requests |
+| [`tools/parse-usbmon.py`](tools/parse-usbmon.py), [`tools/parse-usbpcap.py`](tools/parse-usbpcap.py) | Decoders for Linux `usbmon` and Windows USBPcap captures |
+| [`c920-mic-wake`](c920-mic-wake), [`51-c920-mic-wake.rules`](51-c920-mic-wake.rules) | The optional plug-in wake-up script and its udev rule |
 
 ## Other webcams
 
-The approach should carry over to other UVC webcams whose mics go silent in the same way: all-zero samples, working on Windows. Change the vendor and product IDs in the udev rule, and check the interface numbers, alt setting and packet size in the script against `lsusb -v`. Reports and PRs are welcome.
+Other webcams whose mics go silent after an unmute may have the same bug. Try `tools/c920-repro.sh` with the device name changed. If it reproduces, the same WirePlumber rule with your device's name should fix it. Reports and PRs are welcome.
 
 ## Author
 

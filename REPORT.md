@@ -4,7 +4,7 @@
 **Device:** Logitech HD Pro Webcam C920, USB ID `046d:082d`, firmware `bcdDevice 0.11`
 **Host:** Intel Tiger Lake laptop (xHCI), Arch Linux / Omarchy 4, PipeWire 1.6.8, WirePlumber 0.5.17
 **Kernels tested:** 7.1.9-arch, 7.2.3-arch, 7.2.5-omarchy
-**Status:** cleared, and guarded by `c920-mic-wake`. The exact trigger isn't confirmed, because the fault stopped reproducing once cleared (see §5).
+**Status:** **root cause found** (§7): a C920 firmware bug in its hardware mute. Fixed with a WirePlumber rule that uses software mute. §1–7 are the investigation, in order.
 
 ---
 
@@ -114,10 +114,10 @@ It was **cleared** by the bisect session in §4, and it has stayed clear across 
 | Feature Unit volume | untouched | `GET_MIN/MAX/RES`, then **`SET_RES` = 1, ten times**, then a sticky-mixer `SET_CUR` sweep |
 | First stream | alt 1 (16 kHz) | alt 3 (32 kHz) |
 
-The ten `SET_RES` writes are the strongest lead for a state that persists, since Windows never
-sends them. It's unconfirmed: the resolution read back as normal (2 dB) while the mic was stuck.
+At this point the ten `SET_RES` writes looked like the strongest lead, since Windows never sends
+them. **§7 disproved this**: they don't affect the mic.
 
-## 6. Fix
+## 6. First fix: plug-in wake-up script (now optional)
 
 [`c920-mic-wake`](c920-mic-wake), run by [`51-c920-mic-wake.rules`](51-c920-mic-wake.rules) via
 `systemd-run` on every `add` event for `046d:082d`, including at boot. It replays the exact
@@ -142,21 +142,55 @@ A draft bug report for the kernel sound maintainers is in
 [`UPSTREAM-REPORT-DRAFT.md`](UPSTREAM-REPORT-DRAFT.md). It isn't submitted yet: it needs a way to
 reproduce the stuck state.
 
-## 7. Side findings
+## 7. Root cause: starting the mic while hardware-muted
+
+To finally catch the trigger, [`tools/c920-rebreak.py`](tools/c920-rebreak.py) sent each suspect
+request to a healthy, freshly plugged webcam over raw USB, with the driver kept away and `usbmon`
+recording. After each step it streamed at 16 and 32 kHz:
+
+```
+  ok   0. very first stream at alt 3 (driver default)
+  ok   2. driver rate cycling alt 1/2/3 with SET_CUR
+  ok   4. SET_RES volume = driver bytes 00 01, x10       ← the suspected culprit: harmless
+  ok   5. driver sticky sweep 0x1400/0x2c00/0x2a00/0x2400
+  ok   6. volume = 0x8000 (UAC 'silence')
+BROKE! 8. mute = 1                  (expected: it's muted)
+BROKE! 9. mute = 0                  mute reads 0, but alt1 0/400, alt3 0/408 packets non-zero
+       ... stayed silent through every later step and the clearing sequence ...
+PHASE 2: replug, normal driver → SOUND (277,489/278,528)
+```
+
+That was this morning's exact symptom: every setting correct, all-zero audio, cleared only by a
+replug. The same experiment through the **normal driver** narrowed it down:
+
+| Sequence (ALSA `Mic Capture Switch`, i.e. the webcam's hardware mute) | Result |
+|---|---|
+| mute → unmute while the mic is idle | fine (275,421/276,480 non-zero) |
+| mute → unmute while the mic is streaming | fine: silent while muted, sound returns on unmute |
+| **mute → start the mic → unmute** | **stuck: 0 of 284,672 non-zero**, until replug |
+
+Reproducer: [`tools/c920-repro.sh`](tools/c920-repro.sh).
+
+**Why it hit this machine:** on Linux, PipeWire normally maps the desktop's mic mute (mute keys,
+the bar's mic toggle, `pactl`, `pavucontrol`) to the webcam's hardware mute. "Muted, then a call
+or recorder opens the mic, then unmute" triggers it. Why the stuck state *also* seemed to survive
+replugs this morning isn't proven. A likely explanation is a saved mute state being re-applied
+on each plug, before an app opened the mic, but the saved state had been overwritten by the time
+it was checked.
+
+**Fix:** [`51-c920-soft-mixer.conf`](51-c920-soft-mixer.conf) sets `api.alsa.soft-mixer = true` for
+the C920 in WirePlumber, so PipeWire mutes in software and never touches the webcam's mute. Verified
+by rerunning the trigger through the desktop mute (`pactl set-source-mute`): the hardware switch
+stayed `[on]`, and the mic recorded 286,429/286,720 non-zero samples after unmute.
+
+## 8. Side findings
 
 - **Bluetooth earbuds show no level in `pavucontrol`, but work on calls.** This is expected: in A2DP (music) mode there's no mic. Apps like Teams switch the earbuds to HFP (headset) mode when a call starts.
 - **Level meters are a poor diagnostic** for this class of fault. Count non-zero samples instead.
 
 ## If you hit this
 
-Before running the fix, capture evidence while the webcam is still stuck. That's what upstream needs:
-
-1. `sudo modprobe usbmon; sudo cat /sys/kernel/debug/usb/usbmon/<bus>u > stuck.txt`, then replug the webcam and record a few seconds.
-2. Decode it with `python3 tools/parse-usbmon.py stuck.txt <devnum>`.
-3. Run `tools/c920-bisect.py` (see its header) to see which step clears it on your webcam.
-
-Please open an issue with the results.
-
----
-
-Investigated by **Paul Oesten** ([@creaseygit](https://github.com/creaseygit)) with Claude Code.
+1. Replug the webcam: that clears the stuck state.
+2. Install the WirePlumber rule (`./install.sh`) so it doesn't happen again.
+3. To confirm your webcam has the same bug, run `tools/c920-repro.sh` *before* installing the rule, then replug.
+4. Please open an issue with the result, especially for other webcam models.
