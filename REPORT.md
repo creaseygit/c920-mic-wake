@@ -4,7 +4,7 @@
 **Device:** Logitech HD Pro Webcam C920, USB ID `046d:082d`, firmware `bcdDevice 0.11`
 **Host:** Intel Tiger Lake laptop (xHCI), Arch Linux / Omarchy 4, PipeWire 1.6.8, WirePlumber 0.5.17
 **Kernels tested:** 7.1.9-arch, 7.2.3-arch, 7.2.5-omarchy
-**Status:** worked around with `c920-mic-wake`. The root cause is inside the webcam's response to the Linux driver's setup sequence.
+**Status:** cleared, and guarded by `c920-mic-wake`. The exact trigger isn't confirmed, because the fault stopped reproducing once cleared (see §5).
 
 ---
 
@@ -89,32 +89,73 @@ With [`tools/c920-bisect.py`](tools/c920-bisect.py), the approach was:
 
 After that sequence, reloading `snd-usb-audio` and recording through PipeWire gave **371,207 non-zero samples of 372,736**. The mic worked through the normal stack.
 
-## 5. Conclusion
+## 5. Follow-up: the stuck state was persistent, and clearing it was lasting
 
-- A freshly plugged-in C920 on this machine goes silent when `snd-usb-audio` is the first thing to configure its audio.
-- Once the mic has streamed once the Windows way (alt 1, before any class requests), it stays awake, and none of the driver's later requests silence it again.
-- The exact trigger within the driver's first setup isn't pinned down. It's somewhere in probe-time requests made before the first stream, not any single request tested in isolation after a wake-up. This bisect didn't cover the driver's alt 3 (32 kHz) default as the *first* stream.
+To pin down the exact trigger, the wake-up fix was paused and the Linux driver's setup of a
+freshly plugged webcam was captured with `usbmon`
+([`captures/linux-driver-setup-fresh-plug.txt`](captures/linux-driver-setup-fresh-plug.txt)).
+**This time the mic worked through the plain driver**: 286,070 of 286,720 samples were non-zero,
+and the journal confirmed the fix didn't run.
+
+So the silence wasn't caused afresh by every plug-in. The webcam was **stuck** in a silent
+state that survived:
+
+- several physical replugs and a different USB port,
+- three kernels (7.1.9, 7.2.3, 7.2.5),
+- a trip to Windows, where the mic worked despite the stuck state.
+
+It was **cleared** by the bisect session in §4, and it has stayed clear across replugs since.
+
+### What differs between Windows and Linux at plug-in
+
+| | Windows | Linux `snd-usb-audio` |
+|---|---|---|
+| Audio class requests at plug-in | none | cycles alt 1/2/3 with endpoint sample-rate `SET_CUR` |
+| Feature Unit volume | untouched | `GET_MIN/MAX/RES`, then **`SET_RES` = 1, ten times**, then a sticky-mixer `SET_CUR` sweep |
+| First stream | alt 1 (16 kHz) | alt 3 (32 kHz) |
+
+The ten `SET_RES` writes are the strongest lead for a state that persists, since Windows never
+sends them. It's unconfirmed: the resolution read back as normal (2 dB) while the mic was stuck.
 
 ## 6. Fix
 
-[`c920-mic-wake`](c920-mic-wake), run by [`51-c920-mic-wake.rules`](51-c920-mic-wake.rules) via `systemd-run` on every `add` event for `046d:082d`, including at boot:
+[`c920-mic-wake`](c920-mic-wake), run by [`51-c920-mic-wake.rules`](51-c920-mic-wake.rules) via
+`systemd-run` on every `add` event for `046d:082d`, including at boot. It replays the exact
+sequence that cleared the stuck state:
 
-1. Wait for `snd-usb-audio` to finish probing.
-2. Unbind it from the audio interfaces.
-3. Claim them over usbfs, select alt 1, and stream isochronous IN for 0.5 s.
-4. Return to alt 0, release the interfaces, and re-bind `snd-usb-audio`.
+1. Wait for `snd-usb-audio` to finish probing, then unbind it from the audio interfaces.
+2. Claim them over usbfs and stream alt 1 for 0.5 s, with no class requests first.
+3. Get and set the sample rate to 16 kHz, unmute, read the volume, and sweep it max → min → 36 dB.
+4. Stream alt 1 again for 0.3 s.
+5. Release the interfaces and re-bind `snd-usb-audio`.
 
-Verified after a real replug: the warm-up logged 486/504 packets non-zero, and PipeWire then recorded **373,084 non-zero samples of 374,784**.
+On a healthy mic it's harmless and takes about a second. Verified after a replug: the warm-up
+logged 486/504 then 286/304 non-zero packets, and PipeWire then recorded **378,516 non-zero samples
+of 378,880**.
+
+**Untested:** whether it clears a *stuck* webcam when run this way, after `snd-usb-audio` has
+already probed. The sequence cleared the stuck state when the driver had been kept away from a
+freshly plugged webcam (§4). If the stuck state comes back and the fix doesn't clear it, run the
+§4 procedure with `tools/c920-bisect.py`.
+
+A draft bug report for the kernel sound maintainers is in
+[`UPSTREAM-REPORT-DRAFT.md`](UPSTREAM-REPORT-DRAFT.md). It isn't submitted yet: it needs a way to
+reproduce the stuck state.
 
 ## 7. Side findings
 
 - **Bluetooth earbuds show no level in `pavucontrol`, but work on calls.** This is expected: in A2DP (music) mode there's no mic. Apps like Teams switch the earbuds to HFP (headset) mode when a call starts.
 - **Level meters are a poor diagnostic** for this class of fault. Count non-zero samples instead.
 
-## Possible next steps upstream
+## If you hit this
 
-- Capture the driver's probe sequence with `usbmon` on a fresh plug, then replay it request by request against a freshly plugged webcam, to find the exact trigger.
-- If one specific request is confirmed, propose a `snd-usb-audio` quirk for `046d:082d` to linux-sound.
+Before running the fix, capture evidence while the webcam is still stuck. That's what upstream needs:
+
+1. `sudo modprobe usbmon; sudo cat /sys/kernel/debug/usb/usbmon/<bus>u > stuck.txt`, then replug the webcam and record a few seconds.
+2. Decode it with `python3 tools/parse-usbmon.py stuck.txt <devnum>`.
+3. Run `tools/c920-bisect.py` (see its header) to see which step clears it on your webcam.
+
+Please open an issue with the results.
 
 ---
 

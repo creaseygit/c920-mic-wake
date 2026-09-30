@@ -1,0 +1,675 @@
+   2.249s  SET_CONFIGURATION video-control            wValue=0x0001
+   2.249s  GET_INFO(uvc)     video-control unit 3     wValue=0x0200
+   2.249s  GET_INFO(uvc)     video-control unit 3     wValue=0x0300
+   2.249s  GET_INFO(uvc)     video-control unit 3     wValue=0x0700
+   2.249s  GET_INFO(uvc)     video-control unit 3     wValue=0x0800
+   2.249s  GET_INFO(uvc)     video-control unit 3     wValue=0x0a00
+   2.249s  GET_INFO(uvc)     video-control unit 3     wValue=0x0100
+   2.249s  GET_INFO(uvc)     video-control unit 3     wValue=0x0400
+   2.249s  GET_INFO(uvc)     video-control unit 3     wValue=0x0500
+   2.250s  GET_CUR           video-control unit 3     wValue=0x0500
+   2.250s  SET_CUR           video-control unit 3     wValue=0x0500 data=00
+   2.250s  SET_CUR           video-control unit 3     wValue=0x0500 data=02
+   2.250s  GET_INFO(uvc)     video-control unit 3     wValue=0x0b00
+   2.250s  GET_INFO(uvc)     video-control unit 1     wValue=0x0200
+   2.250s  GET_INFO(uvc)     video-control unit 1     wValue=0x0300
+   2.250s  GET_INFO(uvc)     video-control unit 1     wValue=0x0400
+   2.250s  GET_INFO(uvc)     video-control unit 1     wValue=0x0600
+   2.250s  GET_INFO(uvc)     video-control unit 1     wValue=0x0b00
+   2.250s  GET_INFO(uvc)     video-control unit 1     wValue=0x0d00
+   2.250s  GET_INFO(uvc)     video-control unit 1     wValue=0x0800
+   2.250s  SET_INTERFACE     video-stream             alt 0
+   2.250s  GET_DEF(uvc)      video-stream             wValue=0x0100
+   2.250s  SET_CUR           video-stream             wValue=0x0100 data=01000101 15160500 00000000 3d000000 00000060 09000000 0000
+   2.250s  GET_CUR           video-stream             wValue=0x0100
+   2.251s  SET_INTERFACE     audio-stream             alt 0
+   2.251s  SET_INTERFACE     audio-stream             alt 1
+   2.307s  SET_CUR           endpoint 0x82            sample rate = 16000 Hz
+   2.308s  GET_CUR           endpoint 0x82            sample rate
+   2.310s  SET_INTERFACE     audio-stream             alt 0
+   2.311s  SET_INTERFACE     audio-stream             alt 2
+   2.366s  SET_CUR           endpoint 0x82            sample rate = 24000 Hz
+   2.368s  GET_CUR           endpoint 0x82            sample rate
+   2.370s  SET_INTERFACE     audio-stream             alt 0
+   2.371s  SET_INTERFACE     audio-stream             alt 3
+   2.427s  SET_CUR           endpoint 0x82            sample rate = 32000 Hz
+   2.429s  GET_CUR           endpoint 0x82            sample rate
+   2.431s  SET_INTERFACE     audio-stream             alt 0
+   2.431s  GET_CUR           audio-control unit 5     mute
+   2.433s  GET_MAX           audio-control unit 5     volume
+   2.435s  GET_MIN           audio-control unit 5     volume
+   2.437s  GET_RES           audio-control unit 5     volume
+   2.439s  SET_RES           audio-control unit 5     volume = 0001
+   2.441s  SET_RES           audio-control unit 5     volume = 0001
+   2.443s  SET_RES           audio-control unit 5     volume = 0001
+   2.445s  SET_RES           audio-control unit 5     volume = 0001
+   2.447s  SET_RES           audio-control unit 5     volume = 0001
+   2.449s  SET_RES           audio-control unit 5     volume = 0001
+   2.451s  SET_RES           audio-control unit 5     volume = 0001
+   2.453s  SET_RES           audio-control unit 5     volume = 0001
+   2.455s  SET_RES           audio-control unit 5     volume = 0001
+   2.457s  SET_RES           audio-control unit 5     volume = 0001
+   2.459s  GET_RES           audio-control unit 5     volume
+   2.461s  GET_CUR           audio-control unit 5     volume
+   2.463s  SET_CUR           audio-control unit 5     volume = 0014
+   2.465s  GET_CUR           audio-control unit 5     volume
+   2.467s  SET_CUR           audio-control unit 5     volume = 002c
+   2.469s  GET_CUR           audio-control unit 5     volume
+   2.471s  SET_CUR           audio-control unit 5     volume = 002a
+   2.520s  GET_DEF(uvc)      video-control unit 1     wValue=0x0d00
+   2.520s  GET_MIN           video-control unit 1     wValue=0x0d00
+   2.520s  GET_MAX           video-control unit 1     wValue=0x0d00
+   2.520s  GET_RES           video-control unit 1     wValue=0x0d00
+   2.521s  GET_DEF(uvc)      video-control unit 1     wValue=0x0b00
+   2.521s  GET_MIN           video-control unit 1     wValue=0x0b00
+   2.521s  GET_MAX           video-control unit 1     wValue=0x0b00
+   2.521s  GET_RES           video-control unit 1     wValue=0x0b00
+   2.525s  SET_CUR           audio-control unit 5     volume = 0024
+   2.557s  SET_INTERFACE     audio-stream             alt 3
+   2.613s  SET_CUR           endpoint 0x82            sample rate = 32000 Hz
+   2.614s  GET_CUR           endpoint 0x82            sample rate
+   2.619s  SET_INTERFACE     audio-stream             alt 0
+   2.621s  SET_INTERFACE     audio-stream             alt 3
+   2.677s  SET_CUR           endpoint 0x82            sample rate = 32000 Hz
+   2.679s  GET_CUR           endpoint 0x82            sample rate
+   2.681s  SET_INTERFACE     audio-stream             alt 0
+   2.684s  SET_INTERFACE     audio-stream             alt 3
+   2.740s  SET_CUR           endpoint 0x82            sample rate = 32000 Hz
+   2.741s  GET_CUR           endpoint 0x82            sample rate
+   2.743s  SET_INTERFACE     audio-stream             alt 0
+   2.778s  SET_INTERFACE     audio-stream             alt 3
+   2.833s  SET_CUR           endpoint 0x82            sample rate = 32000 Hz
+   2.835s  GET_CUR           endpoint 0x82            sample rate
+   3.526s  GET_DEF(uvc)      video-control unit 3     wValue=0x0200
+   3.526s  GET_MIN           video-control unit 3     wValue=0x0200
+   3.527s  GET_MAX           video-control unit 3     wValue=0x0200
+   3.527s  GET_RES           video-control unit 3     wValue=0x0200
+   3.527s  GET_DEF(uvc)      video-control unit 3     wValue=0x0300
+   3.527s  GET_MIN           video-control unit 3     wValue=0x0300
+   3.527s  GET_MAX           video-control unit 3     wValue=0x0300
+   3.527s  GET_RES           video-control unit 3     wValue=0x0300
+   3.527s  GET_DEF(uvc)      video-control unit 3     wValue=0x0700
+   3.528s  GET_MIN           video-control unit 3     wValue=0x0700
+   3.528s  GET_MAX           video-control unit 3     wValue=0x0700
+   3.528s  GET_RES           video-control unit 3     wValue=0x0700
+   3.528s  GET_DEF(uvc)      video-control unit 3     wValue=0x0b00
+   3.528s  GET_DEF(uvc)      video-control unit 3     wValue=0x0400
+   3.528s  GET_MIN           video-control unit 3     wValue=0x0400
+   3.528s  GET_MAX           video-control unit 3     wValue=0x0400
+   3.528s  GET_RES           video-control unit 3     wValue=0x0400
+   3.528s  GET_DEF(uvc)      video-control unit 3     wValue=0x0500
+   3.529s  GET_CUR           video-control unit 3     wValue=0x0b00
+   3.529s  GET_DEF(uvc)      video-control unit 3     wValue=0x0a00
+   3.529s  GET_MIN           video-control unit 3     wValue=0x0a00
+   3.529s  GET_MAX           video-control unit 3     wValue=0x0a00
+   3.529s  GET_RES           video-control unit 3     wValue=0x0a00
+   3.529s  GET_DEF(uvc)      video-control unit 3     wValue=0x0800
+   3.530s  GET_MIN           video-control unit 3     wValue=0x0800
+   3.530s  GET_MAX           video-control unit 3     wValue=0x0800
+   3.530s  GET_RES           video-control unit 3     wValue=0x0800
+   3.530s  GET_DEF(uvc)      video-control unit 3     wValue=0x0100
+   3.530s  GET_MIN           video-control unit 3     wValue=0x0100
+   3.530s  GET_MAX           video-control unit 3     wValue=0x0100
+   3.530s  GET_RES           video-control unit 3     wValue=0x0100
+   3.530s  GET_DEF(uvc)      video-control unit 1     wValue=0x0200
+   3.530s  GET_RES           video-control unit 1     wValue=0x0200
+   3.531s  GET_CUR           video-control unit 1     wValue=0x0200
+   3.531s  GET_DEF(uvc)      video-control unit 1     wValue=0x0400
+   3.531s  GET_MIN           video-control unit 1     wValue=0x0400
+   3.531s  GET_MAX           video-control unit 1     wValue=0x0400
+   3.531s  GET_RES           video-control unit 1     wValue=0x0400
+   3.532s  GET_CUR           video-control unit 1     wValue=0x0800
+   3.532s  GET_DEF(uvc)      video-control unit 1     wValue=0x0600
+   3.532s  GET_MIN           video-control unit 1     wValue=0x0600
+   3.532s  GET_MAX           video-control unit 1     wValue=0x0600
+   3.532s  GET_RES           video-control unit 1     wValue=0x0600
+   3.532s  GET_DEF(uvc)      video-control unit 1     wValue=0x0800
+   3.533s  GET_CUR           video-control unit 3     wValue=0x0200
+   3.533s  GET_CUR           video-control unit 3     wValue=0x0300
+   3.533s  GET_CUR           video-control unit 3     wValue=0x0700
+   3.533s  GET_CUR           video-control unit 3     wValue=0x0400
+   3.533s  GET_CUR           video-control unit 3     wValue=0x0500
+   3.534s  GET_CUR           video-control unit 3     wValue=0x0a00
+   3.534s  GET_CUR           video-control unit 3     wValue=0x0800
+   3.534s  GET_CUR           video-control unit 3     wValue=0x0100
+   3.534s  GET_CUR           video-control unit 1     wValue=0x0400
+   3.534s  GET_CUR           video-control unit 1     wValue=0x0300
+   3.534s  GET_CUR           video-control unit 1     wValue=0x0d00
+   3.535s  GET_CUR           video-control unit 1     wValue=0x0600
+   3.535s  GET_CUR           video-control unit 1     wValue=0x0b00
+   3.535s  GET_CUR           video-control unit 3     wValue=0x0400
+   3.536s  GET_CUR           video-control unit 3     wValue=0x0a00
+   3.536s  GET_CUR           video-control unit 1     wValue=0x0400
+   3.536s  GET_CUR           video-control unit 1     wValue=0x0600
+   3.537s  SET_CUR           video-stream             wValue=0x0100 data=01000101 15160500 00000000 00000000 00000000 00000000 0000
+   3.537s  GET_MIN           video-stream             wValue=0x0100
+   3.537s  GET_MAX           video-stream             wValue=0x0100
+   3.537s  SET_CUR           video-stream             wValue=0x0100 data=01000101 15160500 00000000 3d000000 00000000 00000000 0000
+   3.537s  GET_CUR           video-stream             wValue=0x0100
+   3.537s  SET_CUR           video-stream             wValue=0x0100 data=01000102 15160500 00000000 00000000 00000000 00000000 0000
+   3.537s  GET_MIN           video-stream             wValue=0x0100
+   3.537s  GET_MAX           video-stream             wValue=0x0100
+   3.537s  SET_CUR           video-stream             wValue=0x0100 data=01000102 15160500 00000000 3d000000 00000000 00000000 0000
+   3.537s  GET_CUR           video-stream             wValue=0x0100
+   3.537s  SET_CUR           video-stream             wValue=0x0100 data=01000103 15160500 00000000 00000000 00000000 00000000 0000
+   3.537s  GET_MIN           video-stream             wValue=0x0100
+   3.538s  GET_MAX           video-stream             wValue=0x0100
+   3.538s  SET_CUR           video-stream             wValue=0x0100 data=01000103 15160500 00000000 3d000000 00000000 00000000 0000
+   3.538s  GET_CUR           video-stream             wValue=0x0100
+   3.538s  SET_CUR           video-stream             wValue=0x0100 data=01000104 15160500 00000000 00000000 00000000 00000000 0000
+   3.538s  GET_MIN           video-stream             wValue=0x0100
+   3.538s  GET_MAX           video-stream             wValue=0x0100
+   3.538s  SET_CUR           video-stream             wValue=0x0100 data=01000104 15160500 00000000 3d000000 00000000 00000000 0000
+   3.538s  GET_CUR           video-stream             wValue=0x0100
+   3.538s  SET_CUR           video-stream             wValue=0x0100 data=01000105 15160500 00000000 00000000 00000000 00000000 0000
+   3.538s  GET_MIN           video-stream             wValue=0x0100
+   3.538s  GET_MAX           video-stream             wValue=0x0100
+   3.538s  SET_CUR           video-stream             wValue=0x0100 data=01000105 15160500 00000000 3d000000 00000000 00000000 0000
+   3.538s  GET_CUR           video-stream             wValue=0x0100
+   3.538s  SET_CUR           video-stream             wValue=0x0100 data=01000106 15160500 00000000 00000000 00000000 00000000 0000
+   3.539s  GET_MIN           video-stream             wValue=0x0100
+   3.539s  GET_MAX           video-stream             wValue=0x0100
+   3.539s  SET_CUR           video-stream             wValue=0x0100 data=01000106 15160500 00000000 3d000000 00000000 00000000 0000
+   3.539s  GET_CUR           video-stream             wValue=0x0100
+   3.539s  SET_CUR           video-stream             wValue=0x0100 data=01000107 15160500 00000000 00000000 00000000 00000000 0000
+   3.539s  GET_MIN           video-stream             wValue=0x0100
+   3.539s  GET_MAX           video-stream             wValue=0x0100
+   3.539s  SET_CUR           video-stream             wValue=0x0100 data=01000107 15160500 00000000 3d000000 00000000 00000000 0000
+   3.539s  GET_CUR           video-stream             wValue=0x0100
+   3.539s  SET_CUR           video-stream             wValue=0x0100 data=01000108 15160500 00000000 00000000 00000000 00000000 0000
+   3.539s  GET_MIN           video-stream             wValue=0x0100
+   3.539s  GET_MAX           video-stream             wValue=0x0100
+   3.539s  SET_CUR           video-stream             wValue=0x0100 data=01000108 15160500 00000000 3d000000 00000000 00000000 0000
+   3.539s  GET_CUR           video-stream             wValue=0x0100
+   3.540s  SET_CUR           video-stream             wValue=0x0100 data=01000109 15160500 00000000 00000000 00000000 00000000 0000
+   3.540s  GET_MIN           video-stream             wValue=0x0100
+   3.540s  GET_MAX           video-stream             wValue=0x0100
+   3.540s  SET_CUR           video-stream             wValue=0x0100 data=01000109 15160500 00000000 3d000000 00000000 00000000 0000
+   3.540s  GET_CUR           video-stream             wValue=0x0100
+   3.540s  SET_CUR           video-stream             wValue=0x0100 data=0100010a 15160500 00000000 00000000 00000000 00000000 0000
+   3.540s  GET_MIN           video-stream             wValue=0x0100
+   3.540s  GET_MAX           video-stream             wValue=0x0100
+   3.540s  SET_CUR           video-stream             wValue=0x0100 data=0100010a 15160500 00000000 3d000000 00000000 00000000 0000
+   3.540s  GET_CUR           video-stream             wValue=0x0100
+   3.540s  SET_CUR           video-stream             wValue=0x0100 data=0100010b 9a5b0600 00000000 00000000 00000000 00000000 0000
+   3.540s  GET_MIN           video-stream             wValue=0x0100
+   3.540s  GET_MAX           video-stream             wValue=0x0100
+   3.540s  SET_CUR           video-stream             wValue=0x0100 data=0100010b 9a5b0600 00000000 3d000000 00000000 00000000 0000
+   3.540s  GET_CUR           video-stream             wValue=0x0100
+   3.541s  SET_CUR           video-stream             wValue=0x0100 data=0100010c 9a5b0600 00000000 00000000 00000000 00000000 0000
+   3.541s  GET_MIN           video-stream             wValue=0x0100
+   3.541s  GET_MAX           video-stream             wValue=0x0100
+   3.541s  SET_CUR           video-stream             wValue=0x0100 data=0100010c 9a5b0600 00000000 3d000000 00000000 00000000 0000
+   3.541s  GET_CUR           video-stream             wValue=0x0100
+   3.541s  SET_CUR           video-stream             wValue=0x0100 data=0100010d 2a2c0a00 00000000 00000000 00000000 00000000 0000
+   3.541s  GET_MIN           video-stream             wValue=0x0100
+   3.541s  GET_MAX           video-stream             wValue=0x0100
+   3.541s  SET_CUR           video-stream             wValue=0x0100 data=0100010d 2a2c0a00 00000000 3d000000 00000000 00000000 0000
+   3.541s  GET_CUR           video-stream             wValue=0x0100
+   3.541s  SET_CUR           video-stream             wValue=0x0100 data=0100010e 2a2c0a00 00000000 00000000 00000000 00000000 0000
+   3.541s  GET_MIN           video-stream             wValue=0x0100
+   3.541s  GET_MAX           video-stream             wValue=0x0100
+   3.541s  SET_CUR           video-stream             wValue=0x0100 data=0100010e 2a2c0a00 00000000 3d000000 00000000 00000000 0000
+   3.542s  GET_CUR           video-stream             wValue=0x0100
+   3.542s  SET_CUR           video-stream             wValue=0x0100 data=0100010f 40420f00 00000000 00000000 00000000 00000000 0000
+   3.542s  GET_MIN           video-stream             wValue=0x0100
+   3.542s  GET_MAX           video-stream             wValue=0x0100
+   3.542s  SET_CUR           video-stream             wValue=0x0100 data=0100010f 40420f00 00000000 3d000000 00000000 00000000 0000
+   3.542s  GET_CUR           video-stream             wValue=0x0100
+   3.542s  SET_CUR           video-stream             wValue=0x0100 data=01000110 55581400 00000000 00000000 00000000 00000000 0000
+   3.542s  GET_MIN           video-stream             wValue=0x0100
+   3.542s  GET_MAX           video-stream             wValue=0x0100
+   3.542s  SET_CUR           video-stream             wValue=0x0100 data=01000110 55581400 00000000 3d000000 00000000 00000000 0000
+   3.542s  GET_CUR           video-stream             wValue=0x0100
+   3.542s  SET_CUR           video-stream             wValue=0x0100 data=01000111 80841e00 00000000 00000000 00000000 00000000 0000
+   3.543s  GET_MIN           video-stream             wValue=0x0100
+   3.543s  GET_MAX           video-stream             wValue=0x0100
+   3.543s  SET_CUR           video-stream             wValue=0x0100 data=01000111 80841e00 00000000 3d000000 00000000 00000000 0000
+   3.543s  GET_CUR           video-stream             wValue=0x0100
+   3.543s  SET_CUR           video-stream             wValue=0x0100 data=01000112 3e4b4c00 00000000 00000000 00000000 00000000 0000
+   3.543s  GET_MIN           video-stream             wValue=0x0100
+   3.543s  GET_MAX           video-stream             wValue=0x0100
+   3.543s  SET_CUR           video-stream             wValue=0x0100 data=01000112 3e4b4c00 00000000 3d000000 00000000 00000000 0000
+   3.543s  GET_CUR           video-stream             wValue=0x0100
+   3.543s  SET_CUR           video-stream             wValue=0x0100 data=01000113 3e4b4c00 00000000 00000000 00000000 00000000 0000
+   3.543s  GET_MIN           video-stream             wValue=0x0100
+   3.543s  GET_MAX           video-stream             wValue=0x0100
+   3.543s  SET_CUR           video-stream             wValue=0x0100 data=01000113 3e4b4c00 00000000 3d000000 00000000 00000000 0000
+   3.543s  GET_CUR           video-stream             wValue=0x0100
+   3.544s  SET_CUR           video-stream             wValue=0x0100 data=01000201 15160500 00000000 00000000 00000000 00000000 0000
+   3.544s  GET_MIN           video-stream             wValue=0x0100
+   3.544s  GET_MAX           video-stream             wValue=0x0100
+   3.544s  SET_CUR           video-stream             wValue=0x0100 data=01000201 15160500 00000000 3d000000 00000000 00000000 0000
+   3.544s  GET_CUR           video-stream             wValue=0x0100
+   3.544s  SET_CUR           video-stream             wValue=0x0100 data=01000202 15160500 00000000 00000000 00000000 00000000 0000
+   3.544s  GET_MIN           video-stream             wValue=0x0100
+   3.544s  GET_MAX           video-stream             wValue=0x0100
+   3.544s  SET_CUR           video-stream             wValue=0x0100 data=01000202 15160500 00000000 3d000000 00000000 00000000 0000
+   3.544s  GET_CUR           video-stream             wValue=0x0100
+   3.544s  SET_CUR           video-stream             wValue=0x0100 data=01000203 15160500 00000000 00000000 00000000 00000000 0000
+   3.544s  GET_MIN           video-stream             wValue=0x0100
+   3.544s  GET_MAX           video-stream             wValue=0x0100
+   3.544s  SET_CUR           video-stream             wValue=0x0100 data=01000203 15160500 00000000 3d000000 00000000 00000000 0000
+   3.545s  GET_CUR           video-stream             wValue=0x0100
+   3.545s  SET_CUR           video-stream             wValue=0x0100 data=01000204 15160500 00000000 00000000 00000000 00000000 0000
+   3.545s  GET_MIN           video-stream             wValue=0x0100
+   3.545s  GET_MAX           video-stream             wValue=0x0100
+   3.545s  SET_CUR           video-stream             wValue=0x0100 data=01000204 15160500 00000000 3d000000 00000000 00000000 0000
+   3.545s  GET_CUR           video-stream             wValue=0x0100
+   3.545s  SET_CUR           video-stream             wValue=0x0100 data=01000205 15160500 00000000 00000000 00000000 00000000 0000
+   3.545s  GET_MIN           video-stream             wValue=0x0100
+   3.545s  GET_MAX           video-stream             wValue=0x0100
+   3.545s  SET_CUR           video-stream             wValue=0x0100 data=01000205 15160500 00000000 3d000000 00000000 00000000 0000
+   3.545s  GET_CUR           video-stream             wValue=0x0100
+   3.545s  SET_CUR           video-stream             wValue=0x0100 data=01000206 15160500 00000000 00000000 00000000 00000000 0000
+   3.546s  GET_MIN           video-stream             wValue=0x0100
+   3.546s  GET_MAX           video-stream             wValue=0x0100
+   3.546s  SET_CUR           video-stream             wValue=0x0100 data=01000206 15160500 00000000 3d000000 00000000 00000000 0000
+   3.546s  GET_CUR           video-stream             wValue=0x0100
+   3.546s  SET_CUR           video-stream             wValue=0x0100 data=01000207 15160500 00000000 00000000 00000000 00000000 0000
+   3.546s  GET_MIN           video-stream             wValue=0x0100
+   3.546s  GET_MAX           video-stream             wValue=0x0100
+   3.546s  SET_CUR           video-stream             wValue=0x0100 data=01000207 15160500 00000000 3d000000 00000000 00000000 0000
+   3.546s  GET_CUR           video-stream             wValue=0x0100
+   3.546s  SET_CUR           video-stream             wValue=0x0100 data=01000208 15160500 00000000 00000000 00000000 00000000 0000
+   3.546s  GET_MIN           video-stream             wValue=0x0100
+   3.546s  GET_MAX           video-stream             wValue=0x0100
+   3.546s  SET_CUR           video-stream             wValue=0x0100 data=01000208 15160500 00000000 3d000000 00000000 00000000 0000
+   3.546s  GET_CUR           video-stream             wValue=0x0100
+   3.547s  SET_CUR           video-stream             wValue=0x0100 data=01000209 15160500 00000000 00000000 00000000 00000000 0000
+   3.547s  GET_MIN           video-stream             wValue=0x0100
+   3.547s  GET_MAX           video-stream             wValue=0x0100
+   3.547s  SET_CUR           video-stream             wValue=0x0100 data=01000209 15160500 00000000 3d000000 00000000 00000000 0000
+   3.547s  GET_CUR           video-stream             wValue=0x0100
+   3.547s  SET_CUR           video-stream             wValue=0x0100 data=0100020a 15160500 00000000 00000000 00000000 00000000 0000
+   3.547s  GET_MIN           video-stream             wValue=0x0100
+   3.547s  GET_MAX           video-stream             wValue=0x0100
+   3.547s  SET_CUR           video-stream             wValue=0x0100 data=0100020a 15160500 00000000 3d000000 00000000 00000000 0000
+   3.547s  GET_CUR           video-stream             wValue=0x0100
+   3.547s  SET_CUR           video-stream             wValue=0x0100 data=0100020b 15160500 00000000 00000000 00000000 00000000 0000
+   3.547s  GET_MIN           video-stream             wValue=0x0100
+   3.547s  GET_MAX           video-stream             wValue=0x0100
+   3.547s  SET_CUR           video-stream             wValue=0x0100 data=0100020b 15160500 00000000 3d000000 00000000 00000000 0000
+   3.547s  GET_CUR           video-stream             wValue=0x0100
+   3.548s  SET_CUR           video-stream             wValue=0x0100 data=0100020c 15160500 00000000 00000000 00000000 00000000 0000
+   3.548s  GET_MIN           video-stream             wValue=0x0100
+   3.548s  GET_MAX           video-stream             wValue=0x0100
+   3.548s  SET_CUR           video-stream             wValue=0x0100 data=0100020c 15160500 00000000 3d000000 00000000 00000000 0000
+   3.548s  GET_CUR           video-stream             wValue=0x0100
+   3.548s  SET_CUR           video-stream             wValue=0x0100 data=0100020d 15160500 00000000 00000000 00000000 00000000 0000
+   3.548s  GET_MIN           video-stream             wValue=0x0100
+   3.548s  GET_MAX           video-stream             wValue=0x0100
+   3.548s  SET_CUR           video-stream             wValue=0x0100 data=0100020d 15160500 00000000 3d000000 00000000 00000000 0000
+   3.548s  GET_CUR           video-stream             wValue=0x0100
+   3.548s  SET_CUR           video-stream             wValue=0x0100 data=0100020e 15160500 00000000 00000000 00000000 00000000 0000
+   3.548s  GET_MIN           video-stream             wValue=0x0100
+   3.548s  GET_MAX           video-stream             wValue=0x0100
+   3.548s  SET_CUR           video-stream             wValue=0x0100 data=0100020e 15160500 00000000 3d000000 00000000 00000000 0000
+   3.549s  GET_CUR           video-stream             wValue=0x0100
+   3.549s  SET_CUR           video-stream             wValue=0x0100 data=0100020f 15160500 00000000 00000000 00000000 00000000 0000
+   3.549s  GET_MIN           video-stream             wValue=0x0100
+   3.549s  GET_MAX           video-stream             wValue=0x0100
+   3.549s  SET_CUR           video-stream             wValue=0x0100 data=0100020f 15160500 00000000 3d000000 00000000 00000000 0000
+   3.549s  GET_CUR           video-stream             wValue=0x0100
+   3.549s  SET_CUR           video-stream             wValue=0x0100 data=01000210 15160500 00000000 00000000 00000000 00000000 0000
+   3.549s  GET_MIN           video-stream             wValue=0x0100
+   3.549s  GET_MAX           video-stream             wValue=0x0100
+   3.549s  SET_CUR           video-stream             wValue=0x0100 data=01000210 15160500 00000000 3d000000 00000000 00000000 0000
+   3.549s  GET_CUR           video-stream             wValue=0x0100
+   3.549s  SET_CUR           video-stream             wValue=0x0100 data=01000211 15160500 00000000 00000000 00000000 00000000 0000
+   3.550s  GET_MIN           video-stream             wValue=0x0100
+   3.550s  GET_MAX           video-stream             wValue=0x0100
+   3.550s  SET_CUR           video-stream             wValue=0x0100 data=01000211 15160500 00000000 3d000000 00000000 00000000 0000
+   3.550s  GET_CUR           video-stream             wValue=0x0100
+   3.550s  SET_CUR           video-stream             wValue=0x0100 data=01000301 15160500 00000000 00000000 00000000 00000000 0000
+   3.550s  GET_MIN           video-stream             wValue=0x0100
+   3.550s  GET_MAX           video-stream             wValue=0x0100
+   3.550s  SET_CUR           video-stream             wValue=0x0100 data=01000301 15160500 00000000 3d000000 00000000 00000000 0000
+   3.550s  GET_CUR           video-stream             wValue=0x0100
+   3.550s  SET_CUR           video-stream             wValue=0x0100 data=01000302 15160500 00000000 00000000 00000000 00000000 0000
+   3.550s  GET_MIN           video-stream             wValue=0x0100
+   3.550s  GET_MAX           video-stream             wValue=0x0100
+   3.550s  SET_CUR           video-stream             wValue=0x0100 data=01000302 15160500 00000000 3d000000 00000000 00000000 0000
+   3.550s  GET_CUR           video-stream             wValue=0x0100
+   3.550s  SET_CUR           video-stream             wValue=0x0100 data=01000303 15160500 00000000 00000000 00000000 00000000 0000
+   3.551s  GET_MIN           video-stream             wValue=0x0100
+   3.551s  GET_MAX           video-stream             wValue=0x0100
+   3.551s  SET_CUR           video-stream             wValue=0x0100 data=01000303 15160500 00000000 3d000000 00000000 00000000 0000
+   3.551s  GET_CUR           video-stream             wValue=0x0100
+   3.551s  SET_CUR           video-stream             wValue=0x0100 data=01000304 15160500 00000000 00000000 00000000 00000000 0000
+   3.551s  GET_MIN           video-stream             wValue=0x0100
+   3.551s  GET_MAX           video-stream             wValue=0x0100
+   3.551s  SET_CUR           video-stream             wValue=0x0100 data=01000304 15160500 00000000 3d000000 00000000 00000000 0000
+   3.551s  GET_CUR           video-stream             wValue=0x0100
+   3.551s  SET_CUR           video-stream             wValue=0x0100 data=01000305 15160500 00000000 00000000 00000000 00000000 0000
+   3.551s  GET_MIN           video-stream             wValue=0x0100
+   3.551s  GET_MAX           video-stream             wValue=0x0100
+   3.551s  SET_CUR           video-stream             wValue=0x0100 data=01000305 15160500 00000000 3d000000 00000000 00000000 0000
+   3.551s  GET_CUR           video-stream             wValue=0x0100
+   3.552s  SET_CUR           video-stream             wValue=0x0100 data=01000306 15160500 00000000 00000000 00000000 00000000 0000
+   3.552s  GET_MIN           video-stream             wValue=0x0100
+   3.552s  GET_MAX           video-stream             wValue=0x0100
+   3.552s  SET_CUR           video-stream             wValue=0x0100 data=01000306 15160500 00000000 3d000000 00000000 00000000 0000
+   3.552s  GET_CUR           video-stream             wValue=0x0100
+   3.552s  SET_CUR           video-stream             wValue=0x0100 data=01000307 15160500 00000000 00000000 00000000 00000000 0000
+   3.552s  GET_MIN           video-stream             wValue=0x0100
+   3.552s  GET_MAX           video-stream             wValue=0x0100
+   3.552s  SET_CUR           video-stream             wValue=0x0100 data=01000307 15160500 00000000 3d000000 00000000 00000000 0000
+   3.552s  GET_CUR           video-stream             wValue=0x0100
+   3.552s  SET_CUR           video-stream             wValue=0x0100 data=01000308 15160500 00000000 00000000 00000000 00000000 0000
+   3.552s  GET_MIN           video-stream             wValue=0x0100
+   3.552s  GET_MAX           video-stream             wValue=0x0100
+   3.552s  SET_CUR           video-stream             wValue=0x0100 data=01000308 15160500 00000000 3d000000 00000000 00000000 0000
+   3.553s  GET_CUR           video-stream             wValue=0x0100
+   3.553s  SET_CUR           video-stream             wValue=0x0100 data=01000309 15160500 00000000 00000000 00000000 00000000 0000
+   3.553s  GET_MIN           video-stream             wValue=0x0100
+   3.553s  GET_MAX           video-stream             wValue=0x0100
+   3.553s  SET_CUR           video-stream             wValue=0x0100 data=01000309 15160500 00000000 3d000000 00000000 00000000 0000
+   3.553s  GET_CUR           video-stream             wValue=0x0100
+   3.553s  SET_CUR           video-stream             wValue=0x0100 data=0100030a 15160500 00000000 00000000 00000000 00000000 0000
+   3.553s  GET_MIN           video-stream             wValue=0x0100
+   3.553s  GET_MAX           video-stream             wValue=0x0100
+   3.553s  SET_CUR           video-stream             wValue=0x0100 data=0100030a 15160500 00000000 3d000000 00000000 00000000 0000
+   3.553s  GET_CUR           video-stream             wValue=0x0100
+   3.553s  SET_CUR           video-stream             wValue=0x0100 data=0100030b 15160500 00000000 00000000 00000000 00000000 0000
+   3.554s  GET_MIN           video-stream             wValue=0x0100
+   3.554s  GET_MAX           video-stream             wValue=0x0100
+   3.554s  SET_CUR           video-stream             wValue=0x0100 data=0100030b 15160500 00000000 3d000000 00000000 00000000 0000
+   3.554s  GET_CUR           video-stream             wValue=0x0100
+   3.554s  SET_CUR           video-stream             wValue=0x0100 data=0100030c 15160500 00000000 00000000 00000000 00000000 0000
+   3.554s  GET_MIN           video-stream             wValue=0x0100
+   3.554s  GET_MAX           video-stream             wValue=0x0100
+   3.554s  SET_CUR           video-stream             wValue=0x0100 data=0100030c 15160500 00000000 3d000000 00000000 00000000 0000
+   3.554s  GET_CUR           video-stream             wValue=0x0100
+   3.554s  SET_CUR           video-stream             wValue=0x0100 data=0100030d 15160500 00000000 00000000 00000000 00000000 0000
+   3.554s  GET_MIN           video-stream             wValue=0x0100
+   3.554s  GET_MAX           video-stream             wValue=0x0100
+   3.554s  SET_CUR           video-stream             wValue=0x0100 data=0100030d 15160500 00000000 3d000000 00000000 00000000 0000
+   3.554s  GET_CUR           video-stream             wValue=0x0100
+   3.555s  SET_CUR           video-stream             wValue=0x0100 data=0100030e 15160500 00000000 00000000 00000000 00000000 0000
+   3.555s  GET_MIN           video-stream             wValue=0x0100
+   3.555s  GET_MAX           video-stream             wValue=0x0100
+   3.555s  SET_CUR           video-stream             wValue=0x0100 data=0100030e 15160500 00000000 3d000000 00000000 00000000 0000
+   3.555s  GET_CUR           video-stream             wValue=0x0100
+   3.555s  SET_CUR           video-stream             wValue=0x0100 data=0100030f 15160500 00000000 00000000 00000000 00000000 0000
+   3.555s  GET_MIN           video-stream             wValue=0x0100
+   3.555s  GET_MAX           video-stream             wValue=0x0100
+   3.555s  SET_CUR           video-stream             wValue=0x0100 data=0100030f 15160500 00000000 3d000000 00000000 00000000 0000
+   3.555s  GET_CUR           video-stream             wValue=0x0100
+   3.555s  SET_CUR           video-stream             wValue=0x0100 data=01000310 15160500 00000000 00000000 00000000 00000000 0000
+   3.555s  GET_MIN           video-stream             wValue=0x0100
+   3.555s  GET_MAX           video-stream             wValue=0x0100
+   3.555s  SET_CUR           video-stream             wValue=0x0100 data=01000310 15160500 00000000 3d000000 00000000 00000000 0000
+   3.556s  GET_CUR           video-stream             wValue=0x0100
+   3.556s  SET_CUR           video-stream             wValue=0x0100 data=01000311 15160500 00000000 00000000 00000000 00000000 0000
+   3.556s  GET_MIN           video-stream             wValue=0x0100
+   3.556s  GET_MAX           video-stream             wValue=0x0100
+   3.556s  SET_CUR           video-stream             wValue=0x0100 data=01000311 15160500 00000000 3d000000 00000000 00000000 0000
+   3.556s  GET_CUR           video-stream             wValue=0x0100
+   3.559s  SET_CUR           video-stream             wValue=0x0100 data=01000101 15160500 00000000 00000000 00000000 00000000 0000
+   3.559s  GET_MIN           video-stream             wValue=0x0100
+   3.559s  GET_MAX           video-stream             wValue=0x0100
+   3.559s  SET_CUR           video-stream             wValue=0x0100 data=01000101 15160500 00000000 3d000000 00000000 00000000 0000
+   3.559s  GET_CUR           video-stream             wValue=0x0100
+   3.559s  SET_CUR           video-stream             wValue=0x0100 data=01000102 15160500 00000000 00000000 00000000 00000000 0000
+   3.559s  GET_MIN           video-stream             wValue=0x0100
+   3.559s  GET_MAX           video-stream             wValue=0x0100
+   3.559s  SET_CUR           video-stream             wValue=0x0100 data=01000102 15160500 00000000 3d000000 00000000 00000000 0000
+   3.559s  GET_CUR           video-stream             wValue=0x0100
+   3.559s  SET_CUR           video-stream             wValue=0x0100 data=01000103 15160500 00000000 00000000 00000000 00000000 0000
+   3.560s  GET_MIN           video-stream             wValue=0x0100
+   3.560s  GET_MAX           video-stream             wValue=0x0100
+   3.560s  SET_CUR           video-stream             wValue=0x0100 data=01000103 15160500 00000000 3d000000 00000000 00000000 0000
+   3.560s  GET_CUR           video-stream             wValue=0x0100
+   3.560s  SET_CUR           video-stream             wValue=0x0100 data=01000104 15160500 00000000 00000000 00000000 00000000 0000
+   3.560s  GET_MIN           video-stream             wValue=0x0100
+   3.560s  GET_MAX           video-stream             wValue=0x0100
+   3.560s  SET_CUR           video-stream             wValue=0x0100 data=01000104 15160500 00000000 3d000000 00000000 00000000 0000
+   3.560s  GET_CUR           video-stream             wValue=0x0100
+   3.560s  SET_CUR           video-stream             wValue=0x0100 data=01000105 15160500 00000000 00000000 00000000 00000000 0000
+   3.560s  GET_MIN           video-stream             wValue=0x0100
+   3.560s  GET_MAX           video-stream             wValue=0x0100
+   3.560s  SET_CUR           video-stream             wValue=0x0100 data=01000105 15160500 00000000 3d000000 00000000 00000000 0000
+   3.560s  GET_CUR           video-stream             wValue=0x0100
+   3.561s  SET_CUR           video-stream             wValue=0x0100 data=01000106 15160500 00000000 00000000 00000000 00000000 0000
+   3.561s  GET_MIN           video-stream             wValue=0x0100
+   3.561s  GET_MAX           video-stream             wValue=0x0100
+   3.561s  SET_CUR           video-stream             wValue=0x0100 data=01000106 15160500 00000000 3d000000 00000000 00000000 0000
+   3.561s  GET_CUR           video-stream             wValue=0x0100
+   3.561s  SET_CUR           video-stream             wValue=0x0100 data=01000107 15160500 00000000 00000000 00000000 00000000 0000
+   3.561s  GET_MIN           video-stream             wValue=0x0100
+   3.561s  GET_MAX           video-stream             wValue=0x0100
+   3.561s  SET_CUR           video-stream             wValue=0x0100 data=01000107 15160500 00000000 3d000000 00000000 00000000 0000
+   3.561s  GET_CUR           video-stream             wValue=0x0100
+   3.561s  SET_CUR           video-stream             wValue=0x0100 data=01000108 15160500 00000000 00000000 00000000 00000000 0000
+   3.561s  GET_MIN           video-stream             wValue=0x0100
+   3.562s  GET_MAX           video-stream             wValue=0x0100
+   3.562s  SET_CUR           video-stream             wValue=0x0100 data=01000108 15160500 00000000 3d000000 00000000 00000000 0000
+   3.562s  GET_CUR           video-stream             wValue=0x0100
+   3.562s  SET_CUR           video-stream             wValue=0x0100 data=01000109 15160500 00000000 00000000 00000000 00000000 0000
+   3.562s  GET_MIN           video-stream             wValue=0x0100
+   3.562s  GET_MAX           video-stream             wValue=0x0100
+   3.562s  SET_CUR           video-stream             wValue=0x0100 data=01000109 15160500 00000000 3d000000 00000000 00000000 0000
+   3.562s  GET_CUR           video-stream             wValue=0x0100
+   3.562s  SET_CUR           video-stream             wValue=0x0100 data=0100010a 15160500 00000000 00000000 00000000 00000000 0000
+   3.562s  GET_MIN           video-stream             wValue=0x0100
+   3.562s  GET_MAX           video-stream             wValue=0x0100
+   3.562s  SET_CUR           video-stream             wValue=0x0100 data=0100010a 15160500 00000000 3d000000 00000000 00000000 0000
+   3.562s  GET_CUR           video-stream             wValue=0x0100
+   3.563s  SET_CUR           video-stream             wValue=0x0100 data=0100010b 9a5b0600 00000000 00000000 00000000 00000000 0000
+   3.563s  GET_MIN           video-stream             wValue=0x0100
+   3.563s  GET_MAX           video-stream             wValue=0x0100
+   3.563s  SET_CUR           video-stream             wValue=0x0100 data=0100010b 9a5b0600 00000000 3d000000 00000000 00000000 0000
+   3.563s  GET_CUR           video-stream             wValue=0x0100
+   3.563s  SET_CUR           video-stream             wValue=0x0100 data=0100010c 9a5b0600 00000000 00000000 00000000 00000000 0000
+   3.563s  GET_MIN           video-stream             wValue=0x0100
+   3.563s  GET_MAX           video-stream             wValue=0x0100
+   3.563s  SET_CUR           video-stream             wValue=0x0100 data=0100010c 9a5b0600 00000000 3d000000 00000000 00000000 0000
+   3.564s  GET_CUR           video-stream             wValue=0x0100
+   3.564s  SET_CUR           video-stream             wValue=0x0100 data=0100010d 2a2c0a00 00000000 00000000 00000000 00000000 0000
+   3.564s  GET_MIN           video-stream             wValue=0x0100
+   3.564s  GET_MAX           video-stream             wValue=0x0100
+   3.564s  SET_CUR           video-stream             wValue=0x0100 data=0100010d 2a2c0a00 00000000 3d000000 00000000 00000000 0000
+   3.564s  GET_CUR           video-stream             wValue=0x0100
+   3.564s  SET_CUR           video-stream             wValue=0x0100 data=0100010e 2a2c0a00 00000000 00000000 00000000 00000000 0000
+   3.564s  GET_MIN           video-stream             wValue=0x0100
+   3.564s  GET_MAX           video-stream             wValue=0x0100
+   3.564s  SET_CUR           video-stream             wValue=0x0100 data=0100010e 2a2c0a00 00000000 3d000000 00000000 00000000 0000
+   3.565s  GET_CUR           video-stream             wValue=0x0100
+   3.565s  SET_CUR           video-stream             wValue=0x0100 data=0100010f 40420f00 00000000 00000000 00000000 00000000 0000
+   3.565s  GET_MIN           video-stream             wValue=0x0100
+   3.565s  GET_MAX           video-stream             wValue=0x0100
+   3.565s  SET_CUR           video-stream             wValue=0x0100 data=0100010f 40420f00 00000000 3d000000 00000000 00000000 0000
+   3.565s  GET_CUR           video-stream             wValue=0x0100
+   3.565s  SET_CUR           video-stream             wValue=0x0100 data=01000110 55581400 00000000 00000000 00000000 00000000 0000
+   3.565s  GET_MIN           video-stream             wValue=0x0100
+   3.566s  GET_MAX           video-stream             wValue=0x0100
+   3.566s  SET_CUR           video-stream             wValue=0x0100 data=01000110 55581400 00000000 3d000000 00000000 00000000 0000
+   3.566s  GET_CUR           video-stream             wValue=0x0100
+   3.566s  SET_CUR           video-stream             wValue=0x0100 data=01000111 80841e00 00000000 00000000 00000000 00000000 0000
+   3.566s  GET_MIN           video-stream             wValue=0x0100
+   3.566s  GET_MAX           video-stream             wValue=0x0100
+   3.566s  SET_CUR           video-stream             wValue=0x0100 data=01000111 80841e00 00000000 3d000000 00000000 00000000 0000
+   3.566s  GET_CUR           video-stream             wValue=0x0100
+   3.566s  SET_CUR           video-stream             wValue=0x0100 data=01000112 3e4b4c00 00000000 00000000 00000000 00000000 0000
+   3.566s  GET_MIN           video-stream             wValue=0x0100
+   3.566s  GET_MAX           video-stream             wValue=0x0100
+   3.566s  SET_CUR           video-stream             wValue=0x0100 data=01000112 3e4b4c00 00000000 3d000000 00000000 00000000 0000
+   3.566s  GET_CUR           video-stream             wValue=0x0100
+   3.567s  SET_CUR           video-stream             wValue=0x0100 data=01000113 3e4b4c00 00000000 00000000 00000000 00000000 0000
+   3.567s  GET_MIN           video-stream             wValue=0x0100
+   3.567s  GET_MAX           video-stream             wValue=0x0100
+   3.567s  SET_CUR           video-stream             wValue=0x0100 data=01000113 3e4b4c00 00000000 3d000000 00000000 00000000 0000
+   3.567s  GET_CUR           video-stream             wValue=0x0100
+   3.567s  SET_CUR           video-stream             wValue=0x0100 data=01000201 15160500 00000000 00000000 00000000 00000000 0000
+   3.567s  GET_MIN           video-stream             wValue=0x0100
+   3.567s  GET_MAX           video-stream             wValue=0x0100
+   3.567s  SET_CUR           video-stream             wValue=0x0100 data=01000201 15160500 00000000 3d000000 00000000 00000000 0000
+   3.567s  GET_CUR           video-stream             wValue=0x0100
+   3.567s  SET_CUR           video-stream             wValue=0x0100 data=01000202 15160500 00000000 00000000 00000000 00000000 0000
+   3.567s  GET_MIN           video-stream             wValue=0x0100
+   3.567s  GET_MAX           video-stream             wValue=0x0100
+   3.567s  SET_CUR           video-stream             wValue=0x0100 data=01000202 15160500 00000000 3d000000 00000000 00000000 0000
+   3.568s  GET_CUR           video-stream             wValue=0x0100
+   3.568s  SET_CUR           video-stream             wValue=0x0100 data=01000203 15160500 00000000 00000000 00000000 00000000 0000
+   3.568s  GET_MIN           video-stream             wValue=0x0100
+   3.568s  GET_MAX           video-stream             wValue=0x0100
+   3.568s  SET_CUR           video-stream             wValue=0x0100 data=01000203 15160500 00000000 3d000000 00000000 00000000 0000
+   3.568s  GET_CUR           video-stream             wValue=0x0100
+   3.568s  SET_CUR           video-stream             wValue=0x0100 data=01000204 15160500 00000000 00000000 00000000 00000000 0000
+   3.568s  GET_MIN           video-stream             wValue=0x0100
+   3.568s  GET_MAX           video-stream             wValue=0x0100
+   3.568s  SET_CUR           video-stream             wValue=0x0100 data=01000204 15160500 00000000 3d000000 00000000 00000000 0000
+   3.568s  GET_CUR           video-stream             wValue=0x0100
+   3.568s  SET_CUR           video-stream             wValue=0x0100 data=01000205 15160500 00000000 00000000 00000000 00000000 0000
+   3.569s  GET_MIN           video-stream             wValue=0x0100
+   3.569s  GET_MAX           video-stream             wValue=0x0100
+   3.569s  SET_CUR           video-stream             wValue=0x0100 data=01000205 15160500 00000000 3d000000 00000000 00000000 0000
+   3.569s  GET_CUR           video-stream             wValue=0x0100
+   3.569s  SET_CUR           video-stream             wValue=0x0100 data=01000206 15160500 00000000 00000000 00000000 00000000 0000
+   3.569s  GET_MIN           video-stream             wValue=0x0100
+   3.569s  GET_MAX           video-stream             wValue=0x0100
+   3.569s  SET_CUR           video-stream             wValue=0x0100 data=01000206 15160500 00000000 3d000000 00000000 00000000 0000
+   3.569s  GET_CUR           video-stream             wValue=0x0100
+   3.569s  SET_CUR           video-stream             wValue=0x0100 data=01000207 15160500 00000000 00000000 00000000 00000000 0000
+   3.569s  GET_MIN           video-stream             wValue=0x0100
+   3.569s  GET_MAX           video-stream             wValue=0x0100
+   3.569s  SET_CUR           video-stream             wValue=0x0100 data=01000207 15160500 00000000 3d000000 00000000 00000000 0000
+   3.569s  GET_CUR           video-stream             wValue=0x0100
+   3.570s  SET_CUR           video-stream             wValue=0x0100 data=01000208 15160500 00000000 00000000 00000000 00000000 0000
+   3.570s  GET_MIN           video-stream             wValue=0x0100
+   3.570s  GET_MAX           video-stream             wValue=0x0100
+   3.570s  SET_CUR           video-stream             wValue=0x0100 data=01000208 15160500 00000000 3d000000 00000000 00000000 0000
+   3.570s  GET_CUR           video-stream             wValue=0x0100
+   3.570s  SET_CUR           video-stream             wValue=0x0100 data=01000209 15160500 00000000 00000000 00000000 00000000 0000
+   3.570s  GET_MIN           video-stream             wValue=0x0100
+   3.570s  GET_MAX           video-stream             wValue=0x0100
+   3.570s  SET_CUR           video-stream             wValue=0x0100 data=01000209 15160500 00000000 3d000000 00000000 00000000 0000
+   3.570s  GET_CUR           video-stream             wValue=0x0100
+   3.570s  SET_CUR           video-stream             wValue=0x0100 data=0100020a 15160500 00000000 00000000 00000000 00000000 0000
+   3.570s  GET_MIN           video-stream             wValue=0x0100
+   3.570s  GET_MAX           video-stream             wValue=0x0100
+   3.570s  SET_CUR           video-stream             wValue=0x0100 data=0100020a 15160500 00000000 3d000000 00000000 00000000 0000
+   3.570s  GET_CUR           video-stream             wValue=0x0100
+   3.571s  SET_CUR           video-stream             wValue=0x0100 data=0100020b 15160500 00000000 00000000 00000000 00000000 0000
+   3.571s  GET_MIN           video-stream             wValue=0x0100
+   3.571s  GET_MAX           video-stream             wValue=0x0100
+   3.571s  SET_CUR           video-stream             wValue=0x0100 data=0100020b 15160500 00000000 3d000000 00000000 00000000 0000
+   3.571s  GET_CUR           video-stream             wValue=0x0100
+   3.571s  SET_CUR           video-stream             wValue=0x0100 data=0100020c 15160500 00000000 00000000 00000000 00000000 0000
+   3.571s  GET_MIN           video-stream             wValue=0x0100
+   3.571s  GET_MAX           video-stream             wValue=0x0100
+   3.571s  SET_CUR           video-stream             wValue=0x0100 data=0100020c 15160500 00000000 3d000000 00000000 00000000 0000
+   3.571s  GET_CUR           video-stream             wValue=0x0100
+   3.571s  SET_CUR           video-stream             wValue=0x0100 data=0100020d 15160500 00000000 00000000 00000000 00000000 0000
+   3.571s  GET_MIN           video-stream             wValue=0x0100
+   3.572s  GET_MAX           video-stream             wValue=0x0100
+   3.572s  SET_CUR           video-stream             wValue=0x0100 data=0100020d 15160500 00000000 3d000000 00000000 00000000 0000
+   3.572s  GET_CUR           video-stream             wValue=0x0100
+   3.572s  SET_CUR           video-stream             wValue=0x0100 data=0100020e 15160500 00000000 00000000 00000000 00000000 0000
+   3.572s  GET_MIN           video-stream             wValue=0x0100
+   3.572s  GET_MAX           video-stream             wValue=0x0100
+   3.572s  SET_CUR           video-stream             wValue=0x0100 data=0100020e 15160500 00000000 3d000000 00000000 00000000 0000
+   3.572s  GET_CUR           video-stream             wValue=0x0100
+   3.572s  SET_CUR           video-stream             wValue=0x0100 data=0100020f 15160500 00000000 00000000 00000000 00000000 0000
+   3.572s  GET_MIN           video-stream             wValue=0x0100
+   3.572s  GET_MAX           video-stream             wValue=0x0100
+   3.572s  SET_CUR           video-stream             wValue=0x0100 data=0100020f 15160500 00000000 3d000000 00000000 00000000 0000
+   3.572s  GET_CUR           video-stream             wValue=0x0100
+   3.573s  SET_CUR           video-stream             wValue=0x0100 data=01000210 15160500 00000000 00000000 00000000 00000000 0000
+   3.573s  GET_MIN           video-stream             wValue=0x0100
+   3.573s  GET_MAX           video-stream             wValue=0x0100
+   3.573s  SET_CUR           video-stream             wValue=0x0100 data=01000210 15160500 00000000 3d000000 00000000 00000000 0000
+   3.573s  GET_CUR           video-stream             wValue=0x0100
+   3.573s  SET_CUR           video-stream             wValue=0x0100 data=01000211 15160500 00000000 00000000 00000000 00000000 0000
+   3.573s  GET_MIN           video-stream             wValue=0x0100
+   3.573s  GET_MAX           video-stream             wValue=0x0100
+   3.573s  SET_CUR           video-stream             wValue=0x0100 data=01000211 15160500 00000000 3d000000 00000000 00000000 0000
+   3.573s  GET_CUR           video-stream             wValue=0x0100
+   3.573s  SET_CUR           video-stream             wValue=0x0100 data=01000301 15160500 00000000 00000000 00000000 00000000 0000
+   3.573s  GET_MIN           video-stream             wValue=0x0100
+   3.573s  GET_MAX           video-stream             wValue=0x0100
+   3.573s  SET_CUR           video-stream             wValue=0x0100 data=01000301 15160500 00000000 3d000000 00000000 00000000 0000
+   3.573s  GET_CUR           video-stream             wValue=0x0100
+   3.574s  SET_CUR           video-stream             wValue=0x0100 data=01000302 15160500 00000000 00000000 00000000 00000000 0000
+   3.574s  GET_MIN           video-stream             wValue=0x0100
+   3.574s  GET_MAX           video-stream             wValue=0x0100
+   3.574s  SET_CUR           video-stream             wValue=0x0100 data=01000302 15160500 00000000 3d000000 00000000 00000000 0000
+   3.574s  GET_CUR           video-stream             wValue=0x0100
+   3.574s  SET_CUR           video-stream             wValue=0x0100 data=01000303 15160500 00000000 00000000 00000000 00000000 0000
+   3.574s  GET_MIN           video-stream             wValue=0x0100
+   3.574s  GET_MAX           video-stream             wValue=0x0100
+   3.574s  SET_CUR           video-stream             wValue=0x0100 data=01000303 15160500 00000000 3d000000 00000000 00000000 0000
+   3.574s  GET_CUR           video-stream             wValue=0x0100
+   3.574s  SET_CUR           video-stream             wValue=0x0100 data=01000304 15160500 00000000 00000000 00000000 00000000 0000
+   3.574s  GET_MIN           video-stream             wValue=0x0100
+   3.575s  GET_MAX           video-stream             wValue=0x0100
+   3.575s  SET_CUR           video-stream             wValue=0x0100 data=01000304 15160500 00000000 3d000000 00000000 00000000 0000
+   3.575s  GET_CUR           video-stream             wValue=0x0100
+   3.575s  SET_CUR           video-stream             wValue=0x0100 data=01000305 15160500 00000000 00000000 00000000 00000000 0000
+   3.575s  GET_MIN           video-stream             wValue=0x0100
+   3.575s  GET_MAX           video-stream             wValue=0x0100
+   3.575s  SET_CUR           video-stream             wValue=0x0100 data=01000305 15160500 00000000 3d000000 00000000 00000000 0000
+   3.575s  GET_CUR           video-stream             wValue=0x0100
+   3.575s  SET_CUR           video-stream             wValue=0x0100 data=01000306 15160500 00000000 00000000 00000000 00000000 0000
+   3.575s  GET_MIN           video-stream             wValue=0x0100
+   3.575s  GET_MAX           video-stream             wValue=0x0100
+   3.575s  SET_CUR           video-stream             wValue=0x0100 data=01000306 15160500 00000000 3d000000 00000000 00000000 0000
+   3.575s  GET_CUR           video-stream             wValue=0x0100
+   3.576s  SET_CUR           video-stream             wValue=0x0100 data=01000307 15160500 00000000 00000000 00000000 00000000 0000
+   3.576s  GET_MIN           video-stream             wValue=0x0100
+   3.576s  GET_MAX           video-stream             wValue=0x0100
+   3.576s  SET_CUR           video-stream             wValue=0x0100 data=01000307 15160500 00000000 3d000000 00000000 00000000 0000
+   3.576s  GET_CUR           video-stream             wValue=0x0100
+   3.576s  SET_CUR           video-stream             wValue=0x0100 data=01000308 15160500 00000000 00000000 00000000 00000000 0000
+   3.576s  GET_MIN           video-stream             wValue=0x0100
+   3.576s  GET_MAX           video-stream             wValue=0x0100
+   3.576s  SET_CUR           video-stream             wValue=0x0100 data=01000308 15160500 00000000 3d000000 00000000 00000000 0000
+   3.576s  GET_CUR           video-stream             wValue=0x0100
+   3.576s  SET_CUR           video-stream             wValue=0x0100 data=01000309 15160500 00000000 00000000 00000000 00000000 0000
+   3.576s  GET_MIN           video-stream             wValue=0x0100
+   3.576s  GET_MAX           video-stream             wValue=0x0100
+   3.576s  SET_CUR           video-stream             wValue=0x0100 data=01000309 15160500 00000000 3d000000 00000000 00000000 0000
+   3.576s  GET_CUR           video-stream             wValue=0x0100
+   3.577s  SET_CUR           video-stream             wValue=0x0100 data=0100030a 15160500 00000000 00000000 00000000 00000000 0000
+   3.577s  GET_MIN           video-stream             wValue=0x0100
+   3.577s  GET_MAX           video-stream             wValue=0x0100
+   3.577s  SET_CUR           video-stream             wValue=0x0100 data=0100030a 15160500 00000000 3d000000 00000000 00000000 0000
+   3.577s  GET_CUR           video-stream             wValue=0x0100
+   3.577s  SET_CUR           video-stream             wValue=0x0100 data=0100030b 15160500 00000000 00000000 00000000 00000000 0000
+   3.577s  GET_MIN           video-stream             wValue=0x0100
+   3.577s  GET_MAX           video-stream             wValue=0x0100
+   3.577s  SET_CUR           video-stream             wValue=0x0100 data=0100030b 15160500 00000000 3d000000 00000000 00000000 0000
+   3.577s  GET_CUR           video-stream             wValue=0x0100
+   3.577s  SET_CUR           video-stream             wValue=0x0100 data=0100030c 15160500 00000000 00000000 00000000 00000000 0000
+   3.577s  GET_MIN           video-stream             wValue=0x0100
+   3.578s  GET_MAX           video-stream             wValue=0x0100
+   3.578s  SET_CUR           video-stream             wValue=0x0100 data=0100030c 15160500 00000000 3d000000 00000000 00000000 0000
+   3.578s  GET_CUR           video-stream             wValue=0x0100
+   3.578s  SET_CUR           video-stream             wValue=0x0100 data=0100030d 15160500 00000000 00000000 00000000 00000000 0000
+   3.578s  GET_MIN           video-stream             wValue=0x0100
+   3.578s  GET_MAX           video-stream             wValue=0x0100
+   3.578s  SET_CUR           video-stream             wValue=0x0100 data=0100030d 15160500 00000000 3d000000 00000000 00000000 0000
+   3.578s  GET_CUR           video-stream             wValue=0x0100
+   3.578s  SET_CUR           video-stream             wValue=0x0100 data=0100030e 15160500 00000000 00000000 00000000 00000000 0000
+   3.578s  GET_MIN           video-stream             wValue=0x0100
+   3.578s  GET_MAX           video-stream             wValue=0x0100
+   3.578s  SET_CUR           video-stream             wValue=0x0100 data=0100030e 15160500 00000000 3d000000 00000000 00000000 0000
+   3.578s  GET_CUR           video-stream             wValue=0x0100
+   3.579s  SET_CUR           video-stream             wValue=0x0100 data=0100030f 15160500 00000000 00000000 00000000 00000000 0000
+   3.579s  GET_MIN           video-stream             wValue=0x0100
+   3.579s  GET_MAX           video-stream             wValue=0x0100
+   3.579s  SET_CUR           video-stream             wValue=0x0100 data=0100030f 15160500 00000000 3d000000 00000000 00000000 0000
+   3.579s  GET_CUR           video-stream             wValue=0x0100
+   3.579s  SET_CUR           video-stream             wValue=0x0100 data=01000310 15160500 00000000 00000000 00000000 00000000 0000
+   3.579s  GET_MIN           video-stream             wValue=0x0100
+   3.579s  GET_MAX           video-stream             wValue=0x0100
+   3.579s  SET_CUR           video-stream             wValue=0x0100 data=01000310 15160500 00000000 3d000000 00000000 00000000 0000
+   3.579s  GET_CUR           video-stream             wValue=0x0100
+   3.579s  SET_CUR           video-stream             wValue=0x0100 data=01000311 15160500 00000000 00000000 00000000 00000000 0000
+   3.579s  GET_MIN           video-stream             wValue=0x0100
+   3.579s  GET_MAX           video-stream             wValue=0x0100
+   3.579s  SET_CUR           video-stream             wValue=0x0100 data=01000311 15160500 00000000 3d000000 00000000 00000000 0000
+   3.580s  GET_CUR           video-stream             wValue=0x0100
+
+iso IN packets: 9585  non-zero (first 32 bytes shown by usbmon): 9573

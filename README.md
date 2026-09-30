@@ -15,13 +15,27 @@ A working mic is never exactly zero, even in a silent room. If you get `0 non-ze
 ## What's going on
 
 ```
- plug in ──► snd-usb-audio sets the mic up ──► C920 streams all-zero audio   ✗
- plug in ──► read it once "the Windows way" ──► snd-usb-audio takes over ──► real audio   ✓
+ stuck C920 + Linux driver              ──► all-zero audio            ✗
+ read it once "the Windows way" over USB ──► driver takes over again ──► real audio   ✓
 ```
 
-When a freshly plugged-in C920 is set up by the Linux USB audio driver (`snd-usb-audio`), the webcam itself sends silence. A USB capture shows every audio packet arriving intact, but full of zeros. Windows sets the mic up differently: it just selects the 16 kHz audio mode and starts reading. Doing that once from Linux "wakes" the mic, and from then on the normal driver, PipeWire and every app work as expected.
+The webcam got stuck in a state where, under the Linux USB audio driver (`snd-usb-audio`), it
+sent pure silence. A USB capture showed every audio packet arriving intact, but full of zeros.
+The state survived replugs, a different USB port, three kernels, and a trip to Windows (where the
+mic worked anyway, because Windows sets the mic up far more simply).
 
-`c920-mic-wake` does that automatically. A udev rule runs it every time the C920 is plugged in, and at boot. It briefly detaches the audio driver, reads half a second of audio directly over USB, then re-attaches the driver. The whole thing takes about a second.
+Streaming the mic once the Windows way, straight over USB, then replaying Linux's setup
+requests, cleared it. From then on the normal driver, PipeWire and every app worked, including
+after replugs with no fix running.
+
+`c920-mic-wake` replays that clearing sequence automatically on every plug-in and at boot, as a
+safeguard. A udev rule runs it. It briefly detaches the audio driver, runs the sequence over raw
+USB in about a second, then re-attaches the driver.
+
+The exact trigger isn't confirmed. The strongest lead is that Linux sends the mic's volume
+control ten "set resolution" commands at startup, which Windows never sends. See
+[`REPORT.md`](REPORT.md) and the draft kernel report
+[`UPSTREAM-REPORT-DRAFT.md`](UPSTREAM-REPORT-DRAFT.md).
 
 ## Install
 
@@ -35,7 +49,7 @@ Check it ran:
 
 ```bash
 journalctl -o cat | grep c920-mic-wake | tail -1
-# c920-mic-wake: woke 1-1 (/dev/bus/usb/001/010): 486/504 packets non-zero during warm-up; snd-usb-audio re-bound
+# c920-mic-wake: woke 1-1 (/dev/bus/usb/001/012): 486/504 then 286/304 packets non-zero during warm-up; snd-usb-audio re-bound
 ```
 
 To remove it, run `./uninstall.sh`.
@@ -49,8 +63,13 @@ To remove it, run `./uninstall.sh`.
 | [`c920-mic-wake`](c920-mic-wake) | The fix: wakes the mic over raw usbfs, then hands it back to `snd-usb-audio` |
 | [`51-c920-mic-wake.rules`](51-c920-mic-wake.rules) | udev rule that runs it on every plug-in (`046d:082d`) |
 | [`REPORT.md`](REPORT.md) | The full investigation: every layer tested, the Windows-vs-Linux USB comparison, and the bisect that found the fix |
+| [`UPSTREAM-REPORT-DRAFT.md`](UPSTREAM-REPORT-DRAFT.md) | Draft bug report for the Linux kernel sound maintainers (not submitted) |
+| [`captures/`](captures) | Decoded Linux and Windows USB traffic for a freshly plugged C920 |
 | [`tools/c920-bisect.py`](tools/c920-bisect.py) | Streams the mic the Windows way, then re-adds each request Linux sends, to find which one matters |
 | [`tools/parse-usbpcap.py`](tools/parse-usbpcap.py) | Decodes a Windows USBPcap capture into control requests and audio-packet stats |
+| [`tools/parse-usbmon.py`](tools/parse-usbmon.py) | Decodes a Linux `usbmon` capture into labelled webcam audio/video requests |
+
+**Hit this yourself?** Capture evidence *before* running the fix; see "If you hit this" in [`REPORT.md`](REPORT.md). A reproducible stuck state is what's needed to get this fixed in the kernel.
 
 ## Other webcams
 
